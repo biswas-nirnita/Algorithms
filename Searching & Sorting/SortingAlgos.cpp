@@ -44,7 +44,7 @@ void mergeAlgo(vector<int>& arr, int l, int h, int mid)
         high ++;
     }
 
-    // reverse the order - tmp[0] = arr[l] , tmp[h-l] = arr[h]
+    // Transfer tmp array to real array
     for (int i = l; i <= h; i++)
         arr[i] = tmp [i-l];
 }
@@ -62,14 +62,13 @@ void mergeSort(vector<int>& arr, int l, int h)
 
 // Quick Sort
 // Divide acc to partition ele's pos
-// T.C. - Best case O(nlogn) , Worst - O(n^2)
+// T.C. - Best case O(nlogn) , Worst - O(n^2) -> caused by unbalanced partition (smallest/largest pivot, sorted/reverse sorted arr, all eq elements)
 int partitionAlgo(vector<int>& arr, int l, int h)
 {
     // Pick first / last / mid / median element as pivot
-    // Take 2 counters, initialize it, while i < pivot, keep eles as it is, but i++, let's say you found one ele in the shorter side > than pivot;  
-    // go to the next block now while j > pivot, keep ele as it is, but j-- , now if you found j's ele
-    // swap i & j -> do all these 3 until i <= j, 
-    // after that swap j with pivot, now you have a list when left of pivot is small, right of pivot is bigger
+    // then pick 2 parts of the array, keep all elements in one part smaller than pivot and all elements in another part larger than pivot,
+    // atlast swap the pivot in the middle, now you have a list when left of pivot is small, right of pivot is bigger
+    // This is how partition algo works
     int pivot = arr[l];
     int i = l+1;
     int j = h;
@@ -99,6 +98,7 @@ void quickSort(vector<int>& arr, int l, int h)
         return;
 
     int partitionPos = partitionAlgo(arr, l, h);
+    // for quick sort, we take each part in the right & left of pivot, and find pivot for each of them & go through them recursively
     quickSort(arr, l, partitionPos);
     quickSort(arr, partitionPos + 1, h);
 }
@@ -126,13 +126,13 @@ void bubbleSort(vector<int>& arr)
 }
 
 // Insertion Sort
-// one side is already sorted, take ele from another half, search where to put by doing comparison, 
-// then make space for it by doing passes, hence for n elements n search + n swap = O(n^2)
+// one side is already sorted, take ele from another half, initialize tmp with it
+// Now search where to put by doing comparison, 
+// if temp < array's element, continue shifting, decrement counter, cause in that pass I am going to compare till I find the smallest
+// once I find next element is smaller, I can't shift anymore, in the vaccum I put the tmp I was carrying
+// n elements, n search + n swap for each = O(n^2)
 void insertionSort(vector<int>& arr)
 {
-    // Initialize, declare a temp value
-    // if temp < array's element, continue swapping, decrement counter, cause in that pass I am going to compare till I find the smallest
-    // once I find next element is smaller, I can't swap anymore, in the vaccum I put the tmp I was carrying
     int n = arr.size();
     for (int i = 0; i < n; i++)
     {
@@ -167,6 +167,12 @@ void binaryInsertionSort(vector<int>& arr)
 }
 
 // Selection
+void selectionSort()
+{
+    
+}
+
+// Count
 
 // Radix
 
