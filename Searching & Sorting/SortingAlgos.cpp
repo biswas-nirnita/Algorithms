@@ -167,9 +167,15 @@ void binaryInsertionSort(vector<int>& arr)
 }
 
 // Selection
-void selectionSort()
+void selectionSort(vector<int>& arr)
 {
-    
+    int n = arr.size();
+    for (int i = 0; i < n-1; i++)
+    {
+        int minIdx = i;
+        //for (int j = i+1; j < )
+
+    }
 }
 
 // Count
