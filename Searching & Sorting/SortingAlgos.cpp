@@ -22,11 +22,13 @@ void mergeAlgo(vector<int>& arr, int l, int h, int mid)
 
     while (low <= mid && high <= h)
     {
-        if (arr[low] < arr[high]){
+        if (arr[low] <= arr[high])
+        {
             tmp.push_back(arr[low]);
             low ++;
         }
-        else if (arr[low] > arr[high]){
+        else
+        {
             tmp.push_back(arr[high]);
             high ++;
         }
@@ -75,20 +77,20 @@ int partitionAlgo(vector<int>& arr, int l, int h)
     
     while(i <= j)
     {
-        while (arr[i] < pivot)
+        while (i <= h && arr[i] < pivot)
             i++;
 
-        while (arr[j] > pivot)
+        while (j >= l && arr[j] > pivot)
             j--;
         
         if (i <= j)
         {
+            std::swap(arr[i], arr[j]);
             i++;
             j--;
-            std::swap(arr[i], arr[j]);
         }
     }
-    swap(arr[l], arr[j]);
+    std::swap(arr[l], arr[j]);
     return j;
 }
 
@@ -99,7 +101,7 @@ void quickSort(vector<int>& arr, int l, int h)
 
     int partitionPos = partitionAlgo(arr, l, h);
     // for quick sort, we take each part in the right & left of pivot, and find pivot for each of them & go through them recursively
-    quickSort(arr, l, partitionPos);
+    quickSort(arr, l, partitionPos - 1);
     quickSort(arr, partitionPos + 1, h);
 }
 
@@ -120,7 +122,7 @@ void bubbleSort(vector<int>& arr)
                 std::swap(arr[j], arr[j+1]);
             }
         }
-        if (swapped == false)
+        if (swapped == false) // Because of this Best case : O(n) when array is sorted
             break;
     }
 }
@@ -134,7 +136,7 @@ void bubbleSort(vector<int>& arr)
 void insertionSort(vector<int>& arr)
 {
     int n = arr.size();
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i < n; i++) // i starts from 1, cause 0th element is already sorted
     {
         int tmp = arr[i];
         int j = i-1;
@@ -173,8 +175,12 @@ void selectionSort(vector<int>& arr)
     for (int i = 0; i < n-1; i++)
     {
         int minIdx = i;
-        //for (int j = i+1; j < )
-
+        for (int j = i+1; j < n; j++)
+        {
+            if (arr[minIdx] > arr[j])
+             minIdx = j;
+        }
+        std::swap(arr[minIdx], arr[i]);
     }
 }
 

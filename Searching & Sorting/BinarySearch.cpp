@@ -8,13 +8,12 @@ using namespace std;
 int binarySearch(vector<int>& arr, int key)
 {
     // Non-recursive
-    int l = 1;
-    int n = arr.size();
-    int h = n;
+    int l = 0;
+    int h = arr.size() - 1;
 
     while (l <= h)
     {
-        int mid = (l + h) / 2;
+        int mid = (l + (h-l)) / 2;
         if (key == arr[mid])
             return mid; // Base condition
         else if (key < arr[mid])
@@ -22,7 +21,7 @@ int binarySearch(vector<int>& arr, int key)
         else 
             l = mid + 1; // upper half
     }
-    return 0; // No element found
+    return -1; // No element found
 }
 
 int recBinarySearch(vector<int>& arr, int key, int l, int h)
@@ -31,7 +30,7 @@ int recBinarySearch(vector<int>& arr, int key, int l, int h)
     if (l > h)
         return -1; // Not found case
     
-    int mid = (l + h) / 2;
+    int mid = (l + (h-l)) / 2;
     if (arr[mid] == key)// Base condition
         return mid;
     if (key < arr[mid])
@@ -42,7 +41,8 @@ int recBinarySearch(vector<int>& arr, int key, int l, int h)
 // Used for Binary insertion sort
 int binarySearchPos(vector<int>& arr, int key, int l, int h) {
     if (l > h) return l; // insertion position
-    int mid = (l + h) / 2;
+    
+    int mid = (l + (h-l)) / 2;
     if (arr[mid] == key)
         return mid + 1; // insert after equal elements (stable)
     if (key < arr[mid])
