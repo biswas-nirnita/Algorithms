@@ -3,24 +3,12 @@
 #include <vector>
 using namespace std;
 
-unordered_map<int, vector<int>> implWithAdjList(vector<vector<int>>& edgeList)
-{
-    // Defining a adj list
-    unordered_map<int, vector<int>> adjList;
-    for(int i=0; i<=edgeList.size(); i++)
-    {
-        int a = edgeList[i][0], b = edgeList[i][1];
-        adjList[a].push_back(b);
-        adjList[b].push_back(a);
-    }
-    return adjList;
-}
-
 // Using BFS
-void bfs(int source, unordered_map<int, vector<int>> graph, int n)
+vector<int> bfs(int source, unordered_map<int, vector<int>>& graph, int n)
 {
     queue<int> q;
     vector<int> visited(n+1);
+    vector<int> res;
 
     // Insert the initial, mark it visited
     q.push(source);
@@ -30,6 +18,7 @@ void bfs(int source, unordered_map<int, vector<int>> graph, int n)
     {
         int x = q.front();
         q.pop();
+        res.push_back(x);
         for (auto i: graph[x])
         {
             if (!visited[i])
@@ -41,12 +30,13 @@ void bfs(int source, unordered_map<int, vector<int>> graph, int n)
             }
         }
     }
+    return res; // Returning ans with traversal order
 }
 
 // Using DFS
-void dfs(int node, unordered_map<int, vector<int>> graph, vector<int>& visited)
+void dfs(int node, unordered_map<int, vector<int>>& graph, vector<int>& visited)
 {   
-    cout<<node<<" ";
+    cout<<node<<" "; // So traversal order gets printed
     visited[node] = 1;
 
     for(int neighbour: graph[node])
