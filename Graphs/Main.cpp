@@ -209,3 +209,29 @@ int main()
 
     return 0;
 }
+
+/*
+BFS / DFS              → O(V + E)
+
+Cycle Detection        → O(V + E)
+
+Topological Sort       → O(V + E)
+
+Dijkstra               → O(E log V)
+
+Bellman-Ford           → O(VE)
+
+Floyd-Warshall         → O(V³)
+
+Flood Fill             → O(R × C)
+
+Tree Traversal         → O(N)
+
+BST                    → O(log N) average, O(N) worst
+
+Heap Insert/Delete     → O(log N)
+
+Build Heap             → O(N)
+
+Heap Sort              → O(N log N)
+*/

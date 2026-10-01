@@ -30,7 +30,7 @@ void dfs(vector<vector<int>>& image, int r, int c, int oldColor, int newColor)
         // Change color
         image[r][c] = newColor;
 
-        // 4 directions
+        // 4 directions, Instead of doing this we can have 2 vectors [1, -1, 0, 0] & [0, 0, 1, -1] & iterate over a loop
         dfs(image, r + 1, c, oldColor, newColor);
         dfs(image, r - 1, c, oldColor, newColor);
         dfs(image, r, c + 1, oldColor, newColor);
