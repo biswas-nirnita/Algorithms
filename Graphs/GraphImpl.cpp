@@ -1,6 +1,7 @@
 // edgeList info is given, make graph from it using adjacency list & adjacency matrix
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
 void print_graph(vector<vector<int>> graph)
@@ -36,7 +37,7 @@ void implWithAdjMatrix(vector<vector<int>>& edgeList)
     // Defining a n * n matrix
     int n = edgeList.size();
     vector<vector<int>> adjMatrix(n, vector<int>(n,0));
-    for(int i=0; i<=edgeList.size(); i++)
+    for(int i=0; i<edgeList.size(); i++)
     {
         int a = edgeList[i][0], b = edgeList[i][1]; // Because edgeList is a 1:1 connection
         
@@ -51,7 +52,7 @@ void implWithAdjList(vector<vector<int>>& edgeList)
 {
     // Defining a adj list
     std::unordered_map<int, vector<int>> adjList;
-    for(int i=0; i<=edgeList.size(); i++)
+    for(int i=0; i<edgeList.size(); i++)
     {
         int a = edgeList[i][0], b = edgeList[i][1];
         adjList[a].push_back(b);

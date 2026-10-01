@@ -27,7 +27,7 @@ bool dfs(int node, vector<vector<int>>& graph, vector<int>& visited, int parent)
 
 // adjList possible in this way as well, each index represents the node and the vector represents list of the vertices it is connected to
 // so for a question edgeList can be given eg [[0,4],[1,3],[1,2],[2,4]] or adjList might be given [[4],[2,3],[4]] / {0:[4], 1:[2,3], 2:[4]}
-bool isCycle(int V, vector<vector<int>>& adjList) 
+bool isCycleUndirectedDFS(int V, vector<vector<int>>& adjList) 
 {
     vector<int> visited(V);
     for(int i=0; i <V; i++)
@@ -45,11 +45,10 @@ bool isCycle(int V, vector<vector<int>>& adjList)
 
 // ----------------- Undirected graph: BFS -------------------------------
 /* If a neighbout is visited & check if parent of the current node is not that neighbour then its a cycle, because BFS so a parents array */
-bool bfs(int source, vector<vector<int>>& adjList, vector<int> visited, vector<int> parent)
+bool bfs(int source, vector<vector<int>>& adjList, vector<int>& visited, vector<int>& parent)
 {
     queue<int> q;
     q.push(source);
-    parent.push_back(-1);
     visited[source] = 1;
 
     while (!q.empty())
@@ -78,7 +77,7 @@ bool bfs(int source, vector<vector<int>>& adjList, vector<int> visited, vector<i
     return false;
 }
 
-bool isCycle(int V, vector<vector<int>>& adjList)
+bool isCycleUndirectedBFS(int V, vector<vector<int>>& adjList)
 {
     // Array of parents, because this is a level traversal so one var is not sufficient
     vector<int> visited(V) , parent(V, -1);
@@ -108,14 +107,15 @@ bool dfsDG(int node, vector<vector<int>>& graph, vector<int>& visited, vector<in
         else if (cp[neighbour]) return true; // Base case: Visited + in current path
     }
     cp[node] = 0; // Backtracking: If cycle is not found from this node, then while coming back throw it out of current path
+    return false;
 }
 
-bool isCycle(int V, vector<vector<int>>& adjList)
+bool isCycleDirectedDFS(int V, vector<vector<int>>& adjList)
 {
     vector<int> visited(V), current_path(V);
     for(int i=0; i<V; i++)
     {
-        if(!visited[V])
+        if(!visited[i])
         {
             bool ans = dfsDG(i, adjList, visited, current_path);
             if (ans) return true;

@@ -32,12 +32,11 @@ vector<int> shortestPathDijkstra(vector<vector<pair<int, int>>>& adjList, int sr
         {
             // For adjList its normal {node, weight}
             int neighbourNode = neighbour.first;
-            int prev_dist = distance[neighbourNode];
             int weight = neighbour.second;
 
-            int curr_dist = prev_dist + weight;
+            int curr_dist = distance[node] + weight;
 
-            if (curr_dist < prev_dist)
+            if (curr_dist < distance[neighbourNode])
             {
                 pq.push({curr_dist, neighbourNode});
                 distance[neighbourNode] = curr_dist;
@@ -75,10 +74,9 @@ vector<int> shortestPathBF(vector<vector<pair<int, int>>>& adjList, int src)
         {
             int neighbourNode = neighbours.first;
             int weight = neighbours.second;
-            int prev_dist = distance[neighbourNode];
-            int curr_dist = prev_dist + weight;
+            int curr_dist = distance[i] + weight;
 
-            if (curr_dist < prev_dist)
+            if (curr_dist < distance[neighbourNode])
                 distance[neighbourNode] = curr_dist;
         }
     }
@@ -96,13 +94,13 @@ vector<int> shortestPathBF(vector<vector<pair<int, int>>>& adjList, int src)
 
             if (prev_dist == INT_MAX) continue;
 
-            int curr_dist = prev_dist + weight;
+            int curr_dist = distance[i] + weight;
             if (curr_dist < prev_dist)
                 return {-1};
         }
     }
 
-    for (auto dist: distance)
+    for (auto& dist: distance)
     {
         if (dist == INT_MAX)
             dist = -1;
@@ -146,7 +144,7 @@ vector<vector<int>> shortestPathFloydWarshall(vector<vector<int>>& distanceMatri
         }
     }
 
-    for (auto dist: distanceMatrix)
+    for (auto& dist: distanceMatrix)
     {
         for (auto eleDist: dist)
         {
