@@ -7,17 +7,6 @@
 #include <functional>
 using namespace std;
 
-/*
-    Main driver for the graph files.
-
-    Before compiling, fix the duplicate function names in CycleDetection.cpp:
-      - isCycleUndirectedDFS
-      - isCycleUndirectedBFS
-      - isCycleDirectedDFS
-
-    Also fix the implementation issues noted in the review.
-*/
-
 // GraphImpl.cpp
 void implWithAdjMatrix(vector<vector<int>>& edgeList);
 void implWithAdjList(vector<vector<int>>& edgeList);
