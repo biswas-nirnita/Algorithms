@@ -6,6 +6,8 @@
 using namespace std;
 
 // Dijkstra Algo
+// T.C. = (Extract once, delete min -> log V * V) + (Relax at most one time, decrease key -> log V * E) = V log V + E log V
+// Using PQ / Min heap + Adjacency list
 vector<int> shortestPathDijkstra(vector<vector<pair<int, int>>>& adjList, int src)
 {
     // Nature of pair is {distance, node} so that min heap can quickly judge based on min distance
@@ -24,7 +26,7 @@ vector<int> shortestPathDijkstra(vector<vector<pair<int, int>>>& adjList, int sr
     while(!pq.empty())
     {
         auto x = pq.top();
-        pq.pop();
+        pq.pop(); // log V -> delete min
 
         int node = x.second; // Because we took the min element from the min heap, now there the manner is {distance, node}
 
@@ -38,7 +40,8 @@ vector<int> shortestPathDijkstra(vector<vector<pair<int, int>>>& adjList, int sr
 
             if (curr_dist < distance[neighbourNode])
             {
-                pq.push({curr_dist, neighbourNode});
+                pq.push({curr_dist, neighbourNode}); // log V -> simulating decrease key behaviour, 
+                                                     // here we are keeping (5, B) & (3, B) 2 entries, first one is stale, based on the outdated greater dist
                 distance[neighbourNode] = curr_dist;
             }
         }
@@ -46,7 +49,7 @@ vector<int> shortestPathDijkstra(vector<vector<pair<int, int>>>& adjList, int sr
 
     // Now the distance array contains all the shortest distance from source for all nodes, 
     // so if something's dist is still infinity then its not reachable
-    for (auto dist: distance)
+    for (auto& dist: distance)
     {
         if (dist == INT_MAX)
             dist = -1;
