@@ -8,7 +8,7 @@ private:
     vector<int> parent; // Node's immediate predecessor
     vector<int> rank; // Height of the tree which represent the sets
 public:
-    DSU(int n)
+    DSU(int n) // n -> num of vertices
     {
         rank.resize(n, 1);
         parent.resize(n);

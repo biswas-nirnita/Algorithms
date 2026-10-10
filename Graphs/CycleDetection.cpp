@@ -151,7 +151,7 @@ vector<int> topoSort(int V, vector<vector<int>>& adjList)
     {
         int x = q.front();
         q.pop();
-        ans.push_back(x); // Insert in the ans, so that when we print later this is the sorted array
+        ans.push_back(x); // Insert in the ans, so that when we print later this is the topologically sorted array
         for(auto& neighbour: adjList[x])
         {
             inDegrees[neighbour]--;
